@@ -9,7 +9,7 @@ import 'package:instagram_flutter/widgets/text_field_input.dart';
 import '../responsive/mobile_screen_layout.dart';
 import '../responsive/responsive_layout_screen.dart';
 import '../responsive/web_screen_layout.dart';
-import '../utils/dimensions.dart';
+import '../utils/global_variables.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
