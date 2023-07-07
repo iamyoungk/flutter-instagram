@@ -1,16 +1,5 @@
 # instagram_flutter
 
-A new Flutter project.
+![simulator_screenshot_60BDE36C-AC83-4A5C-A4F3-8694BE3977FB](https://github.com/iamyoungk/flutter-instagram/assets/102649466/f1c2e749-7fda-492c-b3ea-44036b126f70)
+![simulator_screenshot_511B13DA-66A2-469D-82DD-092B79821C27](https://github.com/iamyoungk/flutter-instagram/assets/102649466/6e0ce986-dce5-40f5-a2da-84f0ca2aaad4)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
