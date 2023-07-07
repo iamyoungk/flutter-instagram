@@ -11,6 +11,7 @@ class StorageMethods {
   // adding image to firebase storage
   Future<String> uploadImageToStorage(
       String childName, Uint8List file, bool isPost) async {
+    // creating location to our firebase storage
     // profilePics
     Reference ref =
         _storage.ref().child(childName).child(_auth.currentUser!.uid);

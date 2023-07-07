@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -40,6 +41,12 @@ class _SignupScreenState extends State<SignupScreen> {
     setState(() {
       _isLoading = true;
     });
+    if (_image == null) {
+      http.Response response =
+          await http.get(Uri.parse('https://i.stack.imgur.com/l60Hf.png'));
+      _image = response.bodyBytes;
+    }
+
     String res = await AuthMethods().signUpUser(
       email: _emailController.text,
       password: _passwordController.text,
@@ -204,35 +211,35 @@ class _SignupScreenState extends State<SignupScreen> {
                 child: Container(),
               ),
 
-              // Transitioning to signing up
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                    ),
-                    child: const Text("Don't have an account?"),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  GestureDetector(
-                    onTap: navigateToLogin,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                      ),
-                      child: const Text(
-                        "Sign up.",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // // Transitioning to signing up
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Container(
+              //       padding: const EdgeInsets.symmetric(
+              //         vertical: 8,
+              //       ),
+              //       child: const Text("Don't have an account?"),
+              //     ),
+              //     const SizedBox(
+              //       width: 8,
+              //     ),
+              //     GestureDetector(
+              //       onTap: navigateToLogin,
+              //       child: Container(
+              //         padding: const EdgeInsets.symmetric(
+              //           vertical: 8,
+              //         ),
+              //         child: const Text(
+              //           "Sign up.",
+              //           style: TextStyle(
+              //             fontWeight: FontWeight.bold,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),

@@ -9,6 +9,7 @@ class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  // get user details
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
 
@@ -32,16 +33,16 @@ class AuthMethods {
           password.isNotEmpty ||
           username.isNotEmpty ||
           bio.isNotEmpty) {
-        // register user
+        // registering user in auth with email and password
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
-            email: email, password: password);
+          email: email,
+          password: password,
+        );
 
         print(cred.user!.uid);
 
         String photoUrl = await StorageMethods()
             .uploadImageToStorage('profilePics', file, false);
-
-        // add user to our database
 
         model.User user = model.User(
           username: username,
@@ -53,6 +54,7 @@ class AuthMethods {
           following: [],
         );
 
+        // add user to our database
         await _firestore.collection('users').doc(cred.user!.uid).set(
               user.toJson(),
             );
@@ -93,6 +95,7 @@ class AuthMethods {
 
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
+        // logging in user with email and password
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
         res = "success";
@@ -107,5 +110,9 @@ class AuthMethods {
       res = err.toString();
     }
     return res;
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }

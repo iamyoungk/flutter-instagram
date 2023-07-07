@@ -17,6 +17,7 @@ class FirestoreMethods {
     String username,
     String profImage,
   ) async {
+    // asking uid here because we dont want to make extra calls to firebase auth when we can just get from our state management
     String res = "some error occured";
     try {
       // create a folder named 'childName'
@@ -99,6 +100,32 @@ class FirestoreMethods {
       await _firestore.collection('posts').doc(postId).delete();
     } catch (err) {
       print(err.toString());
+    }
+  }
+
+  Future<void> followUser(String uid, String followId) async {
+    try {
+      DocumentSnapshot snap =
+          await _firestore.collection('users').doc(uid).get();
+      List following = (snap.data()! as dynamic)['following'];
+
+      if (following.contains(followId)) {
+        await _firestore.collection('users').doc(followId).update({
+          'followers': FieldValue.arrayRemove([uid])
+        });
+        await _firestore.collection('users').doc(uid).update({
+          'following': FieldValue.arrayRemove([uid])
+        });
+      } else {
+        await _firestore.collection('users').doc(followId).update({
+          'followers': FieldValue.arrayUnion([uid])
+        });
+        await _firestore.collection('users').doc(uid).update({
+          'following': FieldValue.arrayUnion([uid])
+        });
+      }
+    } catch (e) {
+      print(e.toString());
     }
   }
 }
